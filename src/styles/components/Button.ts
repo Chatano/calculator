@@ -6,11 +6,17 @@ export const Container = styled.button`
   height: ${buttonSize}px;
   border-radius: 4px;
   background-color: #111;
-  cursor: pointer;
   transition: 0.2s;
 
-  &:hover {
-    background-color: #111125;
-    color: #ff8000;
+  &:not(&:disabled) {
+    cursor: pointer;
+    &:hover {
+      background-color: #111125;
+      color: #ff8000;
+    }
+  }
+
+  &:disabled {
+    background-color: #333;
   }
 `;

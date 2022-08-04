@@ -16,6 +16,15 @@ export const Display = styled.div`
   border-radius: 8px;
   padding: 8px 12px;
   height: 100px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  > span {
+    position: absolute;
+    top: 4px;
+    left: 12px;
+  }
   
   * {
     color: #1b1b1b;

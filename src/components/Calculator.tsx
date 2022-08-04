@@ -14,7 +14,7 @@ type IAction = 'sum'
 const allNumbers = [...Array.from({length: 9}, (_, i) => i + 1), 0];
 
 export const Calculator: React.FC = () => {
-  const [action, setAction] = useState<IAction>()
+  const [action, setAction] = useState<IAction | undefined>()
   const [firstNum, setFirstNum] = useState(0)
   const [secondNum, setSecondNum] = useState(0)
 
@@ -24,6 +24,12 @@ export const Calculator: React.FC = () => {
       return;
     }
     setFirstNum(prev => Number(`${prev}${value}`))
+  }
+
+  const clearEverything = () => {
+    setSecondNum(0)
+    setFirstNum(0)
+    setAction(undefined)
   }
 
   return (
@@ -38,9 +44,9 @@ export const Calculator: React.FC = () => {
       <Buttons>
         <TopActions>
           <Button value="CE" />
-          <Button value="C" />
+          <Button value="C" onClick={clearEverything} />
           <Button value="←" />
-          <Button value="÷" />
+          <Button value="÷" disabled={!!action} />
         </TopActions>
 
         <Numbers>
@@ -54,9 +60,9 @@ export const Calculator: React.FC = () => {
         </Numbers>
         
         <RightActions>
-          <Button value="X" />
-          <Button value="-" />
-          <Button value="+" onClick={() => setAction('sum')} />
+          <Button value="X" disabled={!!action} />
+          <Button value="-" disabled={!!action} />
+          <Button value="+" disabled={!!action} onClick={() => setAction('sum')} />
           <Button value="=" />
         </RightActions>
       </Buttons>
