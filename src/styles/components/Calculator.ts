@@ -40,7 +40,7 @@ export const Display = styled.div`
 export const Buttons = styled.div`
   display: grid;
   grid-template-areas:
-    'topActions topActions topActions topActions'
+    'topActions topActions topActions rightActions'
     'numbers numbers numbers rightActions';
   margin-top: ${gap}px;
   width: ${(gap * 3) + (buttonSize * 4)}px;
@@ -68,5 +68,5 @@ export const RightActions = styled.div`
   gap: ${gap}px;
   display: flex;
   flex-direction: column;
-  height: ${buttonSize *4 + (gap * 3)}px;
+  height: ${buttonSize * 5 + (gap * 4)}px;
 `;
