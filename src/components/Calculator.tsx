@@ -32,6 +32,14 @@ export const Calculator: React.FC = () => {
     setAction(undefined)
   }
 
+  const clearCurrentNum = () => {
+    if (action) {
+      setSecondNum(0)
+      return;
+    }
+    setFirstNum(0)
+  }
+
   return (
     <Container>
       <Display>
@@ -43,7 +51,7 @@ export const Calculator: React.FC = () => {
 
       <Buttons>
         <TopActions>
-          <Button value="CE" />
+          <Button value="CE" onClick={clearCurrentNum} />
           <Button value="C" onClick={clearEverything} />
           <Button value="←" />
           <Button value="÷" disabled={!!action} />
