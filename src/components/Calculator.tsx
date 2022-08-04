@@ -1,4 +1,4 @@
-import { Container } from "./styles"
+import { Container } from "../styles/components/Calculator"
 
 export const Calculator: React.FC = () => {
   return (
