@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { 
   Container, 
   Display, 
@@ -36,10 +36,12 @@ export const Calculator: React.FC = () => {
   const [action, setAction] = useState<IAction | undefined>()
   const [firstNum, setFirstNum] = useState(0)
   const [secondNum, setSecondNum] = useState(0)
+  const [result, setResult] = useState<number | undefined>()
 
   const clearEverything = () => {
     setSecondNum(0)
     setFirstNum(0)
+    setResult(undefined)
     setAction(undefined)
   }
 
@@ -70,18 +72,38 @@ export const Calculator: React.FC = () => {
     setFirstNum(genNum)
   }
 
+  const generateResult = () => {
+    if (action === 'sum') {
+      setResult(firstNum + secondNum)
+      return;
+    }
+    if (action === 'multiplication') {
+      setResult(firstNum * secondNum)
+      return;
+    }
+    if (action === 'division') {
+      setResult(firstNum / secondNum)
+      return;
+    }
+    if (action === 'substraction') {
+      setResult(firstNum - secondNum)
+      return;
+    }
+    clearEverything()
+  }
+
   return (
     <Container>
       <Display>
-        {action && <span>{firstNum}</span>}
-        <h1>
-          {action ? secondNum : firstNum}
-        </h1>
+        {action && <span>{firstNum} {actions.find(({act}) => act === action)?.icon} {!!result ? secondNum : ''}</span>}
+        {result ? (
+          <h1>{result}</h1>
+        ) : (<h1>{action ? secondNum : firstNum}</h1>)}
       </Display>
 
       <Buttons>
         <TopActions>
-          <Button value="CE" onClick={clearCurrentNum} />
+          <Button value="CE" onClick={result ? clearEverything : clearCurrentNum} />
           <Button value="C" onClick={clearEverything} />
           <Button value="←" onClick={deleteLastChar} />
         </TopActions>
@@ -98,9 +120,13 @@ export const Calculator: React.FC = () => {
         
         <RightActions>
           {actions.map(({icon, act}) => (
-            <Button value={icon} onClick={() => setAction(act)} disabled={!!action} />
+            <Button 
+              value={icon} 
+              onClick={() => setAction(act)} 
+              disabled={!!action} 
+            />
           ))}
-          <Button value="=" />
+          <Button value="=" onClick={generateResult} />
         </RightActions>
       </Buttons>
     </Container>
