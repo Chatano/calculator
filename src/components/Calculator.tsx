@@ -9,14 +9,26 @@ import {
 } from "../styles/components/Calculator"
 import { Button } from "./Button";
 
-type IAction = 'sum'
+type IAction = 'sum' | 'substraction' | 'multiplication' | 'division'
 
-const actions = {
-  sum: '+',
-  substraction: '-',
-  multiplication: 'X',
-  division: '÷',
-}
+const actions: Array<{ act: IAction, icon: string }> = [
+  {
+    act: 'division',
+    icon: '÷'
+  },
+  {
+    act: 'multiplication',
+    icon: 'X'
+  },
+  {
+    act: 'substraction',
+    icon: '-'
+  },
+  {
+    act: 'sum',
+    icon: '+'
+  },
+]
 
 const allNumbers = [...Array.from({length: 9}, (_, i) => i + 1), 0];
 
@@ -74,10 +86,9 @@ export const Calculator: React.FC = () => {
         </Numbers>
         
         <RightActions>
-          <Button value="÷" disabled={!!action} />
-          <Button value="X" disabled={!!action} />
-          <Button value="-" disabled={!!action} />
-          <Button value="+" disabled={!!action} onClick={() => setAction('sum')} />
+          {actions.map(({icon, act}) => (
+            <Button value={icon} onClick={() => setAction(act)} disabled={!!action} />
+          ))}
           <Button value="=" />
         </RightActions>
       </Buttons>
