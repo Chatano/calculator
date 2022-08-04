@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+export const buttonSize = 64;
+export const gap = 10;
+
 export const Container = styled.div`
   border-radius: 16px;
   width: 320px;
@@ -22,4 +25,38 @@ export const Display = styled.div`
     font-size: 30px;
     line-height: 40px;
   }
+`;
+
+export const Buttons = styled.div`
+  display: grid;
+  grid-template-areas:
+    'topActions topActions topActions topActions'
+    'numbers numbers numbers rightActions';
+  margin-top: ${gap}px;
+  width: ${(gap * 3) + (buttonSize * 4)}px;
+`;
+
+export const TopActions = styled.div`
+  grid-area: topActions;
+  gap: ${gap}px;
+  margin-bottom: ${gap}px;
+  display: flex;
+`;
+
+export const Numbers = styled.div`
+  margin-right: ${gap}px;
+  gap: ${gap}px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  min-width: ${buttonSize * 3 + (gap * 2)}px;
+  justify-content: center;
+`;
+
+export const RightActions = styled.div`
+  grid-area: rightActions;
+  gap: ${gap}px;
+  display: flex;
+  flex-direction: column;
+  height: ${buttonSize *4 + (gap * 3)}px;
 `;

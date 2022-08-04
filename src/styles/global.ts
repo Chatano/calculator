@@ -13,4 +13,10 @@ export const Global = createGlobalStyle`
     min-height: 100vh;
     min-width: 100vw;
   }
+
+  button {
+    border: 0;
+    outline: 0;
+    background: 0;
+  }
 `
