@@ -37,14 +37,6 @@ export const Calculator: React.FC = () => {
   const [firstNum, setFirstNum] = useState(0)
   const [secondNum, setSecondNum] = useState(0)
 
-  const numberButtonClick = (value: number) => {
-    if (action) {
-      setSecondNum(prev => Number(`${prev}${value}`))
-      return;
-    }
-    setFirstNum(prev => Number(`${prev}${value}`))
-  }
-
   const clearEverything = () => {
     setSecondNum(0)
     setFirstNum(0)
@@ -57,6 +49,25 @@ export const Calculator: React.FC = () => {
       return;
     }
     setFirstNum(0)
+  }
+
+  const numberButtonClick = (value: number) => {
+    if (action) {
+      setSecondNum(prev => Number(`${prev}${value}`))
+      return;
+    }
+    setFirstNum(prev => Number(`${prev}${value}`))
+  }
+
+  const deleteLastChar = () => {
+    const genNum = (prev: number) => {
+      return Number(`${prev}`.slice(0, -1))
+    }
+    if (action) {
+      setSecondNum(genNum)
+      return;
+    }
+    setFirstNum(genNum)
   }
 
   return (
@@ -72,7 +83,7 @@ export const Calculator: React.FC = () => {
         <TopActions>
           <Button value="CE" onClick={clearCurrentNum} />
           <Button value="C" onClick={clearEverything} />
-          <Button value="←" />
+          <Button value="←" onClick={deleteLastChar} />
         </TopActions>
 
         <Numbers>
