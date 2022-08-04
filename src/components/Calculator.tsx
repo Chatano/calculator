@@ -9,21 +9,30 @@ import {
 } from "../styles/components/Calculator"
 import { Button } from "./Button";
 
+type IAction = 'sum'
+
 const allNumbers = [...Array.from({length: 9}, (_, i) => i + 1), 0];
 
 export const Calculator: React.FC = () => {
+  const [action, setAction] = useState<IAction>()
   const [firstNum, setFirstNum] = useState(0)
-  
+  const [secondNum, setSecondNum] = useState(0)
+
   const numberButtonClick = (value: number) => {
+    if (action) {
+      setSecondNum(prev => Number(`${prev}${value}`))
+      return;
+    }
     setFirstNum(prev => Number(`${prev}${value}`))
   }
 
   return (
     <Container>
       <Display>
-        <span>
-          {firstNum}
-        </span>
+        {action && <span>{firstNum}</span>}
+        <h1>
+          {action ? secondNum : firstNum}
+        </h1>
       </Display>
 
       <Buttons>
@@ -47,7 +56,7 @@ export const Calculator: React.FC = () => {
         <RightActions>
           <Button value="X" />
           <Button value="-" />
-          <Button value="+" />
+          <Button value="+" onClick={() => setAction('sum')} />
           <Button value="=" />
         </RightActions>
       </Buttons>
