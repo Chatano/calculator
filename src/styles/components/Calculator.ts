@@ -19,6 +19,7 @@ export const Display = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  overflow-x: auto;
 
   > span {
     position: absolute;
